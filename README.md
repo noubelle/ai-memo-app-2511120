@@ -175,10 +175,36 @@ const results = localStorageUtils.searchMemos('React')
 
 ### Vercel 배포
 
+#### 방법 1: Vercel CLI 사용
+
 ```bash
 npm run build
 npx vercel --prod
 ```
+
+#### 방법 2: Vercel 대시보드 사용 (권장)
+
+1. [Vercel](https://vercel.com)에 로그인
+2. "Add New Project" 클릭
+3. GitHub 저장소 `noubelle/ai-memo-app-2511120` 선택
+4. **환경 변수 설정** (중요!):
+   - `GOOGLE_GENAI_API_KEY`: Google Gemini API 키
+   - `NEXT_PUBLIC_SUPABASE_URL`: Supabase 프로젝트 URL
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`: Supabase Anon Key
+5. "Deploy" 클릭
+
+#### 환경 변수 설정 방법
+
+Vercel 대시보드에서:
+1. 프로젝트 선택 → Settings → Environment Variables
+2. 다음 변수들을 추가:
+   ```
+   GOOGLE_GENAI_API_KEY=your_api_key_here
+   NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key_here
+   ```
+3. Environment: Production, Preview, Development 모두 선택
+4. 저장 후 재배포
 
 ### Netlify 배포
 
