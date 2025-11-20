@@ -102,7 +102,6 @@ export const useMemos = () => {
       startTransition(async () => {
         try {
           // Optimistic update
-          const deletedMemo = memos.find(memo => memo.id === id)
           setMemos(prev => prev.filter(memo => memo.id !== id))
 
           // Server action
@@ -115,7 +114,7 @@ export const useMemos = () => {
         }
       })
     },
-    [memos]
+    []
   )
 
   // 메모 검색

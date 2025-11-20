@@ -50,7 +50,7 @@ ${content}
     let tags: string[] = []
     try {
       // JSON 배열 부분만 추출 (마크다운 코드 블록 제거)
-      const jsonMatch = text.match(/\[.*?\]/s)
+      const jsonMatch = text.match(/\[[\s\S]*?\]/)
       if (jsonMatch) {
         tags = JSON.parse(jsonMatch[0])
       } else {
@@ -60,7 +60,7 @@ ${content}
           .map(tag => tag.trim().replace(/^["']|["']$/g, ''))
           .filter(tag => tag.length > 0)
       }
-    } catch (parseError) {
+    } catch {
       // JSON 파싱 실패 시 텍스트에서 태그 추출
       tags = text
         .split(/[,\n]/)

@@ -4,8 +4,19 @@ import { revalidatePath } from 'next/cache'
 import { createServerClient } from '@/lib/supabase/server'
 import { Memo, MemoFormData } from '@/types/memo'
 
+// DB row 타입 정의
+interface DbMemoRow {
+  id: string
+  title: string
+  content: string
+  category: string
+  tags: string[] | null
+  created_at: string
+  updated_at: string
+}
+
 // DB 컬럼명을 타입 필드명으로 변환
-function dbToMemo(row: any): Memo {
+function dbToMemo(row: DbMemoRow): Memo {
   return {
     id: row.id,
     title: row.title,
@@ -18,7 +29,12 @@ function dbToMemo(row: any): Memo {
 }
 
 // 타입 필드명을 DB 컬럼명으로 변환
-function memoToDb(data: MemoFormData): any {
+function memoToDb(data: MemoFormData): {
+  title: string
+  content: string
+  category: string
+  tags: string[]
+} {
   return {
     title: data.title,
     content: data.content,
